@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables - {{.DBName}}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <style> body { font-family: 'Inter', sans-serif; } </style>
+</head>
+<body class="antialiased text-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900">GoDB-Explorer</h1>
+            <p class="mt-1 text-lg text-gray-600">Database: <span class="font-mono bg-gray-100 px-2 py-1 rounded-md text-gray-700">{{.DBName}}</span></p>
+        </header>
+
+        <nav class="mb-8 border-b border-gray-200">
+            <div class="flex space-x-8">
+                <a href="/" class="border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" aria-current="page">Browse Tables</a>
+                <a href="/query" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Custom Query</a>
+            </div>
+        </nav>
+
+        <div class="bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
+            <div class="px-4 py-5 sm:px-6">
+                <h2 class="text-xl font-semibold leading-6 text-gray-900">Database Tables</h2>
+                <p class="mt-1 text-sm text-gray-500">Select a table to view its contents.</p>
+            </div>
+            <div class="border-t border-gray-200">
+                <ul role="list" class="divide-y divide-gray-200">
+                    {{range .Tables}}
+                    <li class="hover:bg-gray-50">
+                        <a href="{{.ViewURL}}" class="block">
+                            <div class="flex items-center px-4 py-4 sm:px-6">
+                                <div class="min-w-0 flex-1 flex items-center">
+                                    <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                                        <div>
+                                            <p class="text-base font-medium text-indigo-600 truncate">{{.Name}}</p>
+                                        </div>
+                                        <div class="hidden md:block">
+                                            <p class="text-sm text-gray-500">{{.RowCount}} rows</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <!-- Heroicon name: solid/chevron-right -->
+                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    {{else}}
+                    <li class="px-4 py-4 sm:px-6">
+                        <p class="text-sm text-gray-500">No tables found in this database.</p>
+                    </li>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
+        <footer class="text-center mt-8 text-sm text-gray-500">
+            Powered by GoDB-Explorer
+        </footer>
+    </div>
+</body>
+</html>
+
