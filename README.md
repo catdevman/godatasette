@@ -4,6 +4,9 @@ Vibe "coded" clone of datasette in Go. Sorry just dislike cli tools that aren't 
 
 ## Usage
   -db string
+
         Path to the SQLite database file (required)
+
   -port int
+
         Port to run the web server on (default 8080)
